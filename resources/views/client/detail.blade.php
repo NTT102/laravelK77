@@ -1,9 +1,10 @@
 @extends('client.layouts.main')
+@section('title','detail')
 @section('content')
 	
 
-		<!-- main -->
-		<div class="colorlib-shop">
+	<!-- main -->
+	<div class="colorlib-shop">
 			<div class="container">
 				<div class="row row-pb-lg">
 					<div class="col-md-10 col-md-offset-1">
@@ -21,9 +22,9 @@
 									<form action="product/AddCart" method="post">
 
 										<div class="desc">
-											<h3> {{ $product->name }}</h3>
+											<h3>Áo Sơ Mi Trắng Kem ASM844</h3>
 											<p class="price">
-												<span>{{ number_format($product->price) }}đ</span>
+												<span>150,000 đ</span>
 											</p>
 											<p>thông tin</p>
 											<p style="text-align: justify;">

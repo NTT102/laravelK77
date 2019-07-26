@@ -15,12 +15,41 @@ use Illuminate\Http\Request;
 * Guest Route
 */
 
-Route::get('/', [
-    'as' => 'admin.dashboard.index',
-    'uses' => 'DashboardController@index'
-]);
+Route::group(['middleware' => 'auth'], function() {
+    Route::get('/', [
+        'as' => 'admin.dashboard.index',
+        'uses' => 'DashboardController@index'
+    ]);
+    
+    Route::resource('products', 'ProductController', [
+        'as' => 'admin',
+        'parameters' => ['products' => 'id']
+    ]);
+    
+    Route::resource('users', 'UserController', [
+        'as' => 'admin',
+        'parameters' => ['user' => 'id']
+    ]);
+    
+    Route::resource('categories', 'CategoryController', [
+        'as' => 'admin',
+        'parameters' => ['categories' => 'id']
+    ]);
+    
+    Route::get('orders/processed', [
+        'as' => 'admin.orders.processed',
+        'uses' => 'OrderController@processed'
+    ]);
+    
+    Route::resource('orders', 'OrderController', [
+        'as' => 'admin',
+        'parameters' => ['orders' => 'id']
+    ]);
+});
 
-Route::get('showLoginForm', [
+
+
+Route::get('login', [
     'as' => 'admin.Login.showLoginForm',
     'uses' => 'Auth\LoginController@showLoginForm'
 ]);
@@ -34,31 +63,4 @@ Route::post('logout', [
     'as' => 'admin.Login.logout',
     'uses' => 'Auth\LoginController@logout'
 ]);
-
-
-Route::resource('products', 'ProductController', [
-    'as' => 'admin',
-    'parameters' => ['products' => 'id']
-]);
-
-Route::resource('users', 'UserController', [
-    'as' => 'admin',
-    'parameters' => ['user' => 'id']
-]);
-
-Route::resource('categories', 'CategoryController', [
-    'as' => 'admin',
-    'parameters' => ['categories' => 'id']
-]);
-
-Route::get('orders/processed', [
-    'as' => 'admin.orders.processed',
-    'uses' => 'OrderController@processed'
-]);
-
-Route::resource('orders', 'OrderController', [
-    'as' => 'admin',
-    'parameters' => ['orders' => 'id']
-]);
-
 

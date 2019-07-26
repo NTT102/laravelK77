@@ -1,10 +1,11 @@
 @extends('client.layouts.main')
+@section('title','complete')
 @section('content')
 	
 
-		<!-- main -->
+	<!-- main -->
 
-		<div class="colorlib-shop">
+	<div class="colorlib-shop">
 			<div class="container">
 				<div class="row row-pb-lg">
 					<div class="col-md-10 col-md-offset-1">

@@ -1,9 +1,10 @@
 @extends('client.layouts.main')
+@section('title','cart')
 @section('content')
 	
 
-		<!-- main -->
-		<div class="colorlib-shop">
+	<!-- main -->
+	<div class="colorlib-shop">
 			<div class="container">
 				<div class="row row-pb-md">
 					<div class="col-md-10 col-md-offset-1">
@@ -45,7 +46,7 @@
 						<div class="product-cart">
 							<div class="one-forth">
 								<div class="product-img">
-									<img class="img-thumbnail cart-img" src="images/ao-so-mi-hoa-tiet-den-asm1223-10191.jpg">
+									<img class="img-thumbnail cart-img" src="/assets/client/images/ao-so-mi-hoa-tiet-den-asm1223-10191.jpg">
 								</div>
 								<div class="detail-buy">
 									<h4>Mã : SP01</h4>
@@ -77,7 +78,7 @@
 						<div class="product-cart">
 							<div class="one-forth">
 								<div class="product-img">
-									<img class="img-thumbnail cart-img" src="images/ao-so-mi-trang-kem-asm836-8193.jpg">
+									<img class="img-thumbnail cart-img" src="/assets/client/images/ao-so-mi-trang-kem-asm836-8193.jpg">
 								</div>
 								<div class="detail-buy">
 									<h4>Mã : SP01</h4>

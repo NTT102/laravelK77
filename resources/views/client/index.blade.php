@@ -1,6 +1,8 @@
 @extends('client.layouts.main')
+@section('title','index')
 @section('content')
 
+<!-- main -->
 <div id="colorlib-featured-product">
 	<div class="container">
 		<div class="row">
@@ -172,30 +174,27 @@
 		</div>
 
 		<div class="row">
-			@foreach ($products as $product)
 			<div class="col-md-3 text-center">
-					<div class="product-entry">
-						<div class="product-img" style="background-image: url(/assets/client/images/ao-so-mi-trang-kem-asm836-8193.jpg);">
-							<p class="tag"><span class="new">New</span></p>
-							<div class="cart">
-								<p>
-									<span class="addtocart"><a href="cart.html"><i
-												class="icon-shopping-cart"></i></a></span>
-									<span><a href="detail.html"><i class="icon-eye"></i></a></span>
-	
-	
-								</p>
-							</div>
-						</div>
-						<div class="desc">
-							<h3><a href="detail.html">{{ $product->name }}</a></h3>
-							<p class="price"><span>{{ number_format($product->price)  }}đ</span></p>
+				<div class="product-entry">
+					<div class="product-img" style="background-image: url(/assets/client/images/ao-so-mi-trang-kem-asm836-8193.jpg);">
+						<p class="tag"><span class="new">New</span></p>
+						<div class="cart">
+							<p>
+								<span class="addtocart"><a href="cart.html"><i
+											class="icon-shopping-cart"></i></a></span>
+								<span><a href="detail.html"><i class="icon-eye"></i></a></span>
+
+
+							</p>
 						</div>
 					</div>
+					<div class="desc">
+						<h3><a href="detail.html">Áo trắng kẻ vằn</a></h3>
+						<p class="price"><span>3.000.000 đ</span></p>
+					</div>
 				</div>
-			@endforeach
-			
-			{{-- <div class="col-md-3 text-center">
+			</div>
+			<div class="col-md-3 text-center">
 				<div class="product-entry">
 					<div class="product-img" style="background-image: url(/assets/client/images/6ds19c007.jpg);">
 						<p class="tag"><span class="new">New</span></p>
@@ -329,6 +328,8 @@
 								<span class="addtocart"><a href="cart.html"><i
 											class="icon-shopping-cart"></i></a></span>
 								<span><a href="detail.html"><i class="icon-eye"></i></a></span>
+
+
 							</p>
 						</div>
 					</div>
@@ -338,8 +339,9 @@
 					</div>
 				</div>
 			</div>
-			</div> --}}
+			</div>
 		</div>
 	</div>
 </div>
+<!-- end main -->
 @endsection

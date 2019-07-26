@@ -1,4 +1,5 @@
 @extends('client.layouts.main')
+@section('title','contact')
 @section('content')
 	
 
