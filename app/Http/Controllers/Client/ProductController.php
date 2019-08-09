@@ -4,15 +4,31 @@ namespace App\Http\Controllers\Client;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 
 class ProductController extends Controller
 {
-    public function shop()
+    const PER_PAGE = 6;
+    public function shop(Request $request)
     {
-        return view('client.shop');
+
+        $conditions = [];
+        $start = null;
+        $end = null;
+        if ($request->start) {
+            $conditions[] = ['price', '>=', $request->start];
+            $start = (int)$request->start;
+        }
+        if ($request->end){
+            $conditions[] = ['price', '<=', $request->end];
+            $end = (int)$request->end;
+        }
+    
+        $products = Product::where($conditions)->latest()->paginate(self::PER_PAGE);
+        return view('client.shop', compact('products', 'start', 'end'));
     }
     public function detail()
     {
-        return view('client.detail');
+        return view('client.detail');   
     }
 }

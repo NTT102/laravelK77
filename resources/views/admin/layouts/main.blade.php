@@ -31,6 +31,7 @@
 	<script src="/assets/admin/js/chart.min.js"></script>
 	<script src="/assets/admin/js/chart-data.js"></script>
 	@stack('js')
+	
 
 </body>
 

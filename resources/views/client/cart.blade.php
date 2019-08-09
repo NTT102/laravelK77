@@ -43,39 +43,44 @@
 								<span>Xóa</span>
 							</div>
 						</div>
+						@forelse (Cart::getContent() as $item)
 						<div class="product-cart">
-							<div class="one-forth">
-								<div class="product-img">
-									<img class="img-thumbnail cart-img" src="/assets/client/images/ao-so-mi-hoa-tiet-den-asm1223-10191.jpg">
+								<div class="one-forth">
+									<div class="product-img">
+										<img class="img-thumbnail cart-img" src="/assets/client/images/ao-so-mi-hoa-tiet-den-asm1223-10191.jpg">
+									</div>
+									<div class="detail-buy">
+										<h4>Mã : {{ $item->id }}</h4>
+										<h5>{{ $item->name }}</h5>
+									</div>
 								</div>
-								<div class="detail-buy">
-									<h4>Mã : SP01</h4>
-									<h5>Áo Khoác Nam Đẹp</h5>
+								<div class="one-eight text-center">
+									<div class="display-tc">
+										<span class="price">{{ number_format($item->price) }} đ</span>
+									</div>
+								</div>
+								<div class="one-eight text-center">
+									<div class="display-tc">
+										<input type="number" id="quantity" name="quantity"
+											class="form-control input-number text-center input-quantity" data-id="{{ $item->id }}" value="{{ $item->quantity }}">
+									</div>
+								</div>
+								<div class="one-eight text-center">
+									<div class="display-tc">
+										<span class="price summed-price">{{ number_format($item->price*$item->quantity) }} đ</span>
+									</div>
+								</div>
+								<div class="one-eight text-center">
+									<div class="display-tc">
+										<a href="#" class="closed"></a>
+									</div>
 								</div>
 							</div>
-							<div class="one-eight text-center">
-								<div class="display-tc">
-									<span class="price">680.000 đ</span>
-								</div>
-							</div>
-							<div class="one-eight text-center">
-								<div class="display-tc">
-									<input type="number" id="quantity" name="quantity"
-										class="form-control input-number text-center" value="1">
-								</div>
-							</div>
-							<div class="one-eight text-center">
-								<div class="display-tc">
-									<span class="price">1.200.000 đ</span>
-								</div>
-							</div>
-							<div class="one-eight text-center">
-								<div class="display-tc">
-									<a href="#" class="closed"></a>
-								</div>
-							</div>
-						</div>
-						<div class="product-cart">
+						@empty
+							<p>giỏ hàng trống quay lại mua hàng</p>
+						@endforelse
+						
+						{{-- <div class="product-cart">
 							<div class="one-forth">
 								<div class="product-img">
 									<img class="img-thumbnail cart-img" src="/assets/client/images/ao-so-mi-trang-kem-asm836-8193.jpg">
@@ -106,7 +111,7 @@
 									<a href="#" class="closed"></a>
 								</div>
 							</div>
-						</div>
+						</div> --}}
 
 
 					</div>
@@ -121,10 +126,10 @@
 								<div class="col-md-3 col-md-push-1 text-center">
 									<div class="total">
 										<div class="sub">
-											<p><span>Tổng:</span> <span>4.000.000 đ</span></p>
+											<p><span>Tổng:</span> <span>{{ number_format(Cart::getSubTotal()) }} đ</span></p>
 										</div>
 										<div class="grand-total">
-											<p><span><strong>Tổng cộng:</strong></span> <span>3.550.000 đ</span></p>
+											<p><span><strong>Tổng cộng:</strong></span> <span>{{ number_format(Cart::getTotal()) }} đ</span></p>
 											<a href="checkout.html" class="btn btn-primary">Thanh toán <i
 													class="icon-arrow-right-circle"></i></a>
 										</div>
@@ -139,3 +144,38 @@
 
 		<!-- end main -->
 		@endsection
+		@push('js')
+
+<script>
+		$(document).ready(function() {
+			$.ajaxSetup({
+    		headers: {
+				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			}
+		});
+
+			$('.input-quantity').change(function(){
+				let data= {
+					id: $(this).attr('data-id'),
+					quantity : $(this).val()
+				};
+
+				let _this = $(this);
+
+				$.ajax({
+					url : '/gio-hang/update',
+					data: data,
+					method: "POST",
+					success: function(scs) {
+						_this.parents('.product-cart').find('.summed-price').text(`${scs.summedPrice} đ`);
+					},
+					error : function() {
+
+					}
+				});
+			});
+			
+		});
+</script>
+
+@endpush
